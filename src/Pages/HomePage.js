@@ -24,6 +24,7 @@ const Homepage = () => {
 	const [searchedUser, setSearchedUser] = useState('')
 	const [username, setUsername] = useState('')
 	const [dataArray, setDataArray] = useState([])
+	const [orgTop10, setOrgTop10] = useState([])
 	const [top10Data, setTop10Data] = useState([])
 
 	// Descending order for most bananas and get top 10
@@ -32,6 +33,7 @@ const Homepage = () => {
 			const data = dataArray.sort((a, b) => {
 				return b.bananas - a.bananas
 			})
+			setOrgTop10(data.slice(0, 10))
 			setTop10Data(data.slice(0, 10))
 		}
 	}
@@ -55,12 +57,11 @@ const Homepage = () => {
 
 	// Search user function
 	const searchUser = () => {
-		// setUsername(username)
 		let findUser = dataArray.find(object => object.name === username)
-		findUser.rank = dataArray.indexOf(findUser)
 		if (findUser) {
+			findUser.rank = dataArray.indexOf(findUser)
 			setSearchedUser(findUser.uid)
-			const findInTop10ExistUsers = top10Data.find(o => o.uid === findUser.uid)
+			const findInTop10ExistUsers = orgTop10.find(o => o.uid === findUser.uid)
 			// If not found replace the last one
 			if (findInTop10ExistUsers === undefined) {
 				top10Data[9] = findUser
