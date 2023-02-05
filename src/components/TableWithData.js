@@ -39,7 +39,7 @@ export default function BasicTable(props) {
 									<TableCell component='th' scope='row' sx={{ color: props.searchedUser === row.uid ? 'red' : '' }}>
 										{row.name || '-'}
 									</TableCell>
-									<TableCell align='right'>{index + 1}</TableCell>
+									<TableCell align='right'>{row.rank ? row.rank : index + 1}</TableCell>
 									<TableCell align='right'>{row.bananas}</TableCell>
 									<TableCell align='right'>{props.searchedUser === row.uid ? 'yes' : 'no'}</TableCell>
 								</TableRow>

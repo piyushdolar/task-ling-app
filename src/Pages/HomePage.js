@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import TextField from '@mui/material/TextField'
 import Grid from '@mui/material/Grid'
 import InputAdornment from '@mui/material/InputAdornment'
@@ -29,12 +29,10 @@ const Homepage = () => {
 	// Descending order for most bananas and get top 10
 	const getTop10Data = () => {
 		if (dataArray) {
-			const data = dataArray
-				.sort((a, b) => {
-					return b.bananas - a.bananas
-				})
-				.slice(0, 10)
-			setTop10Data(data)
+			const data = dataArray.sort((a, b) => {
+				return b.bananas - a.bananas
+			})
+			setTop10Data(data.slice(0, 10))
 		}
 	}
 
@@ -52,12 +50,14 @@ const Homepage = () => {
 	// Setting up top 10 after data has been converted to array
 	useEffect(() => {
 		getTop10Data()
+		// eslint-disable-next-line
 	}, [dataArray])
 
 	// Search user function
 	const searchUser = () => {
 		// setUsername(username)
 		let findUser = dataArray.find(object => object.name === username)
+		findUser.rank = dataArray.indexOf(findUser)
 		if (findUser) {
 			setSearchedUser(findUser.uid)
 			const findInTop10ExistUsers = top10Data.find(o => o.uid === findUser.uid)
@@ -104,9 +104,9 @@ const Homepage = () => {
 
 					{/* Alert */}
 					<Dialog fullScreen={fullScreen} open={open} onClose={handleClose} aria-labelledby='responsive-dialog-title'>
-						<DialogTitle id='responsive-dialog-title'>Username not found!</DialogTitle>
+						<DialogTitle id='responsive-dialog-title'>Not found!</DialogTitle>
 						<DialogContent>
-							<DialogContentText>The entered username is not found, please try searching other usernames.</DialogContentText>
+							<DialogContentText>This user name does not exist! Please specify an existing user name!</DialogContentText>
 						</DialogContent>
 						<DialogActions>
 							<Button onClick={handleClose} autoFocus>
