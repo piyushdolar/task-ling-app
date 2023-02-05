@@ -37,7 +37,7 @@ export default function BasicTable(props) {
 							{top10Data.map((row, index) => (
 								<TableRow key={row.uid} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
 									<TableCell component='th' scope='row' sx={{ color: props.searchedUser === row.uid ? 'red' : '' }}>
-										{row.name}
+										{row.name || '-'}
 									</TableCell>
 									<TableCell align='right'>{index + 1}</TableCell>
 									<TableCell align='right'>{row.bananas}</TableCell>

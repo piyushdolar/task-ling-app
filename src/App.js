@@ -7,11 +7,13 @@ import Homepage from './Pages/HomePage'
 import Testpage from './Pages/Testpage'
 
 function App() {
+	const centerStyle = { bgcolor: '#fbfbfb', height: '100vh', padding: '1em', display: 'flex', alignItems: 'center' }
+
 	return (
 		<BrowserRouter>
 			<CssBaseline />
 			<Container maxWidth='lg'>
-				<Box sx={{ bgcolor: '#fbfbfb', height: '100vh', padding: '1em' }}>
+				<Box sx={centerStyle}>
 					<Routes>
 						<Route path='/' element={<Homepage />} index />
 						<Route path='/test' element={<Testpage />} />
